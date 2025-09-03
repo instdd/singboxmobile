@@ -15,6 +15,7 @@ type Outbound interface {
 type Engine struct {
     out     Outbound
     running bool
+    core    interface{}
 }
 
 // NewEngine creates an Engine bound to Swift-side Outbound.
