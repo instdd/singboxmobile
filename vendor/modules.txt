@@ -1,0 +1,2 @@
+# golang.org/x/mobile v0.0.0-20240520174638-fa72addaaa1b
+## explicit; go 1.18
