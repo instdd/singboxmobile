@@ -1,3 +1,3 @@
-module example.com/singboxmobile
+module github.com/instdd/singboxmobile
 
 go 1.23
