@@ -29,35 +29,9 @@ func New() *Engine { return &Engine{} }
 // package as bindable even if toolchain heuristics are picky.
 func Version() string { return "0.0.1" }
 
-// Start should initialize sing-box with the provided JSON config and spawn
-// goroutines that read from and write to the NEPacketTunnelFlow via the
-// InboundPacket/Outbound callbacks.
-//
-// TODO: Replace the placeholder body with real sing-box startup and TUN
-// bridging (gVisor netstack) when integrating the core module.
-func (e *Engine) Start(config []byte) error {
-    e.running = true
-    if e.out != nil {
-        e.out.Log("singboxmobile: Start called (placeholder)")
-    }
-    // Return an error until a real core is wired to avoid blackholing traffic.
-    return newError("core not integrated")
-}
-
-// Stop terminates the core.
-func (e *Engine) Stop() {
-    e.running = false
-    if e.out != nil {
-        e.out.Log("singboxmobile: Stop")
-    }
-}
-
-// InboundPacket should be called by Swift with packets read from
-// NEPacketTunnelFlow. In a real implementation, feed this into sing-box's
-// TUN device or netstack. Placeholder drops the packet.
-func (e *Engine) InboundPacket(p []byte) {
-    // no-op placeholder
-}
+// The methods Start/Stop/InboundPacket are provided in build-tagged files:
+// - engine_stub.go       (default, no with_singbox): returns explanatory error
+// - engine_singbox.go    (with_singbox): starts real sing-box core
 
 // Helper error type with text for gomobile-friendly bridging.
 type mobErr struct{ s string }
